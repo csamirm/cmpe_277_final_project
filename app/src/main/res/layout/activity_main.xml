@@ -6,41 +6,100 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorDarkGrey"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/ak1595_minor"
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="36dp"
-        android:ems="10"
-        android:hint="@string/edit_message"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/start_scan_button"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/sensor_1_major"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/akm_logo" />
+
 
     <TextView
-        android:id="@+id/ak1595_major"
+        android:id="@+id/sensor_1_major"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="@string/edit_message"
+        android:hint="0"
         android:inputType="textPersonName"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ak1595_minor"
+        app:layout_constraintBottom_toTopOf="@+id/sensor_1_minor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/sensor_1_minor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sensor_2_major"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/sensor_2_major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sensor_2_minor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/sensor_2_minor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/start_scan_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/start_scan_button"
@@ -51,23 +110,11 @@
         android:layout_marginEnd="160dp"
         android:layout_marginBottom="32dp"
         android:text="SCAN"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/ak1595_major"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/akm_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

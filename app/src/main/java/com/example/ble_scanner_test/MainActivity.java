@@ -46,6 +46,7 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -290,8 +291,11 @@ public class MainActivity extends AppCompatActivity
 
                         Log.i("sensor 1 data packet ", ak1595_get_advertising_packet(result));
 
-                        set_minor_value(sensor_1_advertising_packet_data_array[sensor_1_advertising_packet__minor_index]);
-                        set_major_value(sensor_1_advertising_packet_data_array[sensor_1_advertising_packet__major_index]);
+                        set_minor_value(sensor_1_advertising_packet_data_array[sensor_1_advertising_packet__minor_index],
+                                found_device);
+
+                        set_major_value(sensor_1_advertising_packet_data_array[sensor_1_advertising_packet__major_index],
+                                found_device);
 
                         sensor_1_scan_result_list.remove(element_at_beginning_of_list);
                     }
@@ -306,10 +310,13 @@ public class MainActivity extends AppCompatActivity
                             sensor_2_scan_result_list.add(sensor_2_advertising_packet_data);
                         }
 
-                        Log.i("sensor 2 data packet ", ak1595_get_advertising_packet(result));
+                        set_minor_value(sensor_2_advertising_packet_data_array[sensor_1_advertising_packet__minor_index],
+                                found_device);
 
-                        Log.i("sensor 2 major ", sensor_2_advertising_packet_data_array[sensor_1_advertising_packet__major_index]);
-                        Log.i("sensor 2 minor ", sensor_2_advertising_packet_data_array[sensor_1_advertising_packet__minor_index]);
+                        set_major_value(sensor_2_advertising_packet_data_array[sensor_1_advertising_packet__major_index],
+                                found_device);
+
+                        Log.i("sensor 2 data packet ", ak1595_get_advertising_packet(result));
 
                         sensor_2_scan_result_list.remove(element_at_beginning_of_list);
                     }
@@ -432,8 +439,11 @@ public class MainActivity extends AppCompatActivity
 
     private void initialize_minor_value_to_zero()
     {
-        TextView textView = findViewById(R.id.ak1595_minor);
-        textView.setText("DATA:");
+        TextView textView_sensor_1_minor = findViewById(R.id.sensor_1_minor);
+        textView_sensor_1_minor.setText("DATA:");
+
+        TextView textView_sensor_2_minor = findViewById(R.id.sensor_2_minor);
+        textView_sensor_2_minor.setText("DATA:");
     }
 
 
@@ -442,8 +452,11 @@ public class MainActivity extends AppCompatActivity
 
     private void initialize_major_value_to_zero()
     {
-        TextView textView = findViewById(R.id.ak1595_major);
-        textView.setText("DEVICE:");
+        TextView textView_sensor_1_major = findViewById(R.id.sensor_1_major);
+        textView_sensor_1_major.setText("DEVICE:");
+
+        TextView textView_sensor_2_major = findViewById(R.id.sensor_2_major);
+        textView_sensor_2_major.setText("DEVICE:");
     }
 
 
@@ -460,20 +473,36 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void set_minor_value(final String set_to_this_value)
+    private void set_minor_value(final String set_to_this_value, BluetoothDevice device)
     {
-        TextView textView = findViewById(R.id.ak1595_minor);
-        textView.setText("DATA: " + set_to_this_value);
+        if (sensor_1_MAC_address.equals(device.getAddress()))
+        {
+            TextView textView_sensor_1_minor = findViewById(R.id.sensor_1_minor);
+            textView_sensor_1_minor.setText("DATA: " + set_to_this_value);
+        }
+        else if (sensor_2_MAC_address.equals(device.getAddress()))
+        {
+            TextView textView_sensor_2_minor = findViewById(R.id.sensor_2_minor);
+            textView_sensor_2_minor.setText("DATA: " + set_to_this_value);
+        }
     }
 
 
 
 
 
-    private void set_major_value(final String set_to_this_value)
+    private void set_major_value(final String set_to_this_value, BluetoothDevice device)
     {
-        TextView textView = findViewById(R.id.ak1595_major);
-        textView.setText("DEVICE: " + set_to_this_value);
+        if (sensor_1_MAC_address.equals(device.getAddress()))
+        {
+            TextView textView_sensor_1_major = findViewById(R.id.sensor_1_major);
+            textView_sensor_1_major.setText("DEVICE: " + set_to_this_value);
+        }
+        else if (sensor_2_MAC_address.equals(device.getAddress()))
+        {
+            TextView textView_sensor_2_major = findViewById(R.id.sensor_2_major);
+            textView_sensor_2_major.setText("DEVICE: " + set_to_this_value);
+        }
     }
 }
 
