@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AKM BLE Scanner</string>
+    <string name="app_name">CMPE 277 Project</string>
     <string name="action_settings">Settings</string>
     <string name="unknown_device">Settings</string>
 

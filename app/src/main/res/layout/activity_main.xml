@@ -6,7 +6,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorDarkGrey"
+    android:background="@color/colorDarkGreen"
     tools:context=".MainActivity">
 
 
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/akm_logo" />
+        app:srcCompat="@drawable/circuit_wallpaper_2" />
 
 
     <TextView

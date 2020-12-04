@@ -101,10 +101,6 @@ public class MainActivity extends AppCompatActivity
     ArrayList<String> sensor_1_scan_result_list = null;
     ArrayList<String> sensor_2_scan_result_list = null;
 
-
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                                 *
  *                                      F U N C T I O N S                                          *
@@ -124,28 +120,17 @@ public class MainActivity extends AppCompatActivity
         manage_scan_button();
         initialize_scan_settings();
         initialize_scan_filter_settings();
-        initialize_list_of_ak1595_devices_found_by_ble_scan();
+        initialize_list_of_devices_found_by_ble_scan();
+
     }
-
-
-
-
 
     public void onResume() {
         super.onResume();
     }
 
-
-
-
-
     public void onPause() {
         super.onPause();
     }
-
-
-
-
 
     // Use this check to determine whether BLE is supported on the device
     public boolean check_for_ble_support()
@@ -158,13 +143,10 @@ public class MainActivity extends AppCompatActivity
         }
         else
         {
+            Toast.makeText(this, "bluetooth supported...", Toast.LENGTH_SHORT).show();
             return true;
         }
     }
-
-
-
-
 
     // Initializes Bluetooth adapter.
     public boolean initialize_bluetooth_adapter()
@@ -178,16 +160,12 @@ public class MainActivity extends AppCompatActivity
         return check_if_bluetooth_adapter_was_initialized(bluetooth_adapter);
     }
 
-
-
-
-
     // Checks to see if Bluetooth Adapter has been initialized
     public boolean check_if_bluetooth_adapter_was_initialized(BluetoothAdapter bluetooth_adapter)
     {
         if (bluetooth_adapter.isEnabled())
         {
-            // Toast.makeText(this, "bluetooth adapter enabled...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "bluetooth adapter enabled...", Toast.LENGTH_SHORT).show();
             enable_bluetooth_intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enable_bluetooth_intent, REQUEST_ENABLE_BT);
             return true;
@@ -196,20 +174,12 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
-
-
-
-
     public void initialize_scan_settings()
     {
         ScanSettings.Builder settingBuilder = new ScanSettings.Builder();
         settingBuilder.setScanMode(SCAN_MODE_LOW_LATENCY);
         settings = settingBuilder.build();
     }
-
-
-
-
 
     public void initialize_scan_filter_settings()
     {
@@ -228,11 +198,7 @@ public class MainActivity extends AppCompatActivity
         ble_scan_filter.add(scanFilter_2);
     }
 
-
-
-
-
-    public void initialize_list_of_ak1595_devices_found_by_ble_scan()
+    public void initialize_list_of_devices_found_by_ble_scan()
     {
         if (null == sensor_1_scan_result_list)
         {
@@ -244,10 +210,6 @@ public class MainActivity extends AppCompatActivity
             sensor_2_scan_result_list = new ArrayList<>();
         }
     }
-
-
-
-
 
     // start and stop scanning for BLE devices
     private void scanLeDevice(final boolean enable)
@@ -265,10 +227,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
-
-
-
     // Device scan callback.
     private ScanCallback leScanCallback =
             new ScanCallback() {
@@ -281,7 +239,7 @@ public class MainActivity extends AppCompatActivity
 
                     if (sensor_1_MAC_address.equals(found_device.getAddress()))
                     {
-                        final String sensor_1_advertising_packet_data = ak1595_get_advertising_packet(result);
+                        final String sensor_1_advertising_packet_data = get_advertising_packet(result);
                         final String[] sensor_1_advertising_packet_data_array = sensor_1_advertising_packet_data.split(",");
 
                         if (!(null == sensor_1_advertising_packet_data))
@@ -289,7 +247,7 @@ public class MainActivity extends AppCompatActivity
                             sensor_1_scan_result_list.add(sensor_1_advertising_packet_data);
                         }
 
-                        Log.i("sensor 1 data packet ", ak1595_get_advertising_packet(result));
+                        Log.i("sensor 1 data packet ", get_advertising_packet(result));
 
                         set_minor_value(sensor_1_advertising_packet_data_array[sensor_1_advertising_packet__minor_index],
                                 found_device);
@@ -302,7 +260,7 @@ public class MainActivity extends AppCompatActivity
 
                     if (sensor_2_MAC_address.equals(found_device.getAddress()))
                     {
-                        final String sensor_2_advertising_packet_data = ak1595_get_advertising_packet(result);
+                        final String sensor_2_advertising_packet_data = get_advertising_packet(result);
                         final String[] sensor_2_advertising_packet_data_array = sensor_2_advertising_packet_data.split(",");
 
                         if (!(null == sensor_2_advertising_packet_data))
@@ -316,7 +274,7 @@ public class MainActivity extends AppCompatActivity
                         set_major_value(sensor_2_advertising_packet_data_array[sensor_1_advertising_packet__major_index],
                                 found_device);
 
-                        Log.i("sensor 2 data packet ", ak1595_get_advertising_packet(result));
+                        Log.i("sensor 2 data packet ", get_advertising_packet(result));
 
                         sensor_2_scan_result_list.remove(element_at_beginning_of_list);
                     }
@@ -329,10 +287,6 @@ public class MainActivity extends AppCompatActivity
                     Log.i("BLE", "error");
                 }
             };
-
-
-
-
 
     /*
         if start_scan_button_click_count is EVEN, then enable BLE scanning
@@ -360,18 +314,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-
-
-
-
     private boolean ok_to_start_scanning()
     {
         return (0 == (start_scan_button_click_count % 2));
     }
-
-
-
-
 
     private void start_scanning_for_ble_devices(View v)
     {
@@ -383,18 +329,10 @@ public class MainActivity extends AppCompatActivity
         scanLeDevice(true);
     }
 
-
-
-
-
     private void scan_button_was_pressed()
     {
         ++start_scan_button_click_count;
     }
-
-
-
-
 
     private void stop_scanning_for_ble_devices(View v)
     {
@@ -406,11 +344,7 @@ public class MainActivity extends AppCompatActivity
         scanLeDevice(false);
     }
 
-
-
-
-
-    private String ak1595_get_advertising_packet(ScanResult result)
+    private String get_advertising_packet(ScanResult result)
     {
         byte[] manufacturerData = (result.getScanRecord().getManufacturerSpecificData(COMPANY_ID));
 
@@ -469,10 +403,6 @@ public class MainActivity extends AppCompatActivity
         initialize_major_value_to_zero();
     }
 
-
-
-
-
     private void set_minor_value(final String set_to_this_value, BluetoothDevice device)
     {
         if (sensor_1_MAC_address.equals(device.getAddress()))
@@ -486,10 +416,6 @@ public class MainActivity extends AppCompatActivity
             textView_sensor_2_minor.setText("DATA: " + set_to_this_value);
         }
     }
-
-
-
-
 
     private void set_major_value(final String set_to_this_value, BluetoothDevice device)
     {
